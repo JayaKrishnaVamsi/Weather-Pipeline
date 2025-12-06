@@ -59,12 +59,13 @@ Automate the pipeline using:
   weather_pipeline.py  (ETL Script)                     │
  ┌──────────────────────────────────────────────────────┘
  │
+ ```
  ├── Extract  → Fetch weather data for all cities
  ├── Transform → Clean, enrich & detect anomalies
  ├── Load      → Save Parquet & upload CSV to Supabase
  │
  └── Trigger   → Manual run / GitHub Actions / Task Scheduler
-
+```
 
 ---
 
