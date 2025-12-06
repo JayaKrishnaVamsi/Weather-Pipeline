@@ -52,14 +52,13 @@ Automate the pipeline using:
 ---
 
 ## 🧱 Architecture Overview
-
+```
         ┌────────── Weather API (Open-Meteo) ──────────┐
         │                                               │
         ▼                                               │
   weather_pipeline.py  (ETL Script)                     │
  ┌──────────────────────────────────────────────────────┘
  │
- ```
  ├── Extract  → Fetch weather data for all cities
  ├── Transform → Clean, enrich & detect anomalies
  ├── Load      → Save Parquet & upload CSV to Supabase
