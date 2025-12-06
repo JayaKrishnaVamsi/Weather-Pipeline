@@ -1,0 +1,39 @@
+name: Weather Pipeline
+
+on:
+  schedule:
+    # Every day at 06:00 UTC (change as you like)
+    - cron: "0 6 * * *"
+  workflow_dispatch:  # allows manual run from GitHub UI
+    inputs:
+      city:
+        description: "Override city list (optional)"
+        required: false
+        default: ""
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run weather pipeline
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          WEATHER_DEFAULT_CITY: "Delhi"
+          WEATHER_EXTRA_CITIES: "Mumbai,Bangalore,Hyderabad"
+        run: |
+          python weather_pipeline.py
